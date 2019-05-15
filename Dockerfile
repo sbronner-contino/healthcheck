@@ -24,6 +24,10 @@ COPY package.json /app/
 COPY --from=0 /app/revision /app
 COPY src /app/src
 
+RUN addgroup -S app_group && adduser -S app -G app_group && chown -R app:app_group /app
+
+USER app
+
 EXPOSE 8888
 
 CMD ["node", "src/app.js"]
