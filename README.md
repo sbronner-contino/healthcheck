@@ -9,6 +9,16 @@ This is a service to demonstrate a restful endpoint that will tirelessly respond
 * the version of the service (defined by the version file)
 * the git revision that the service is built from (defined by the revision file)
 
+## Quick Start
+
+To run the latest version, a [docker](https://www.docker.com/get-started) image is available on docker hub:
+
+```bash
+docker run -it --rm -p 8888:8888 csbronner/healthcheck
+```
+
+Access the healthcheck endpoint via [http://localhost:8888/healthcheck].
+
 ## Development Workflow
 
 This project uses the [Git Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
