@@ -24,6 +24,7 @@ COPY package.json /app/
 COPY --from=0 /app/revision /app
 COPY src /app/src
 
+# Ensure that by default any container created from this image uses a non-root user
 RUN addgroup -S app_group && adduser -S app -G app_group && chown -R app:app_group /app
 
 USER app
