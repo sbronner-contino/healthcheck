@@ -1,10 +1,5 @@
 language: node_js
 node_js:
-  - "12"
+- '12'
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=csbronner/healthcheck
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker push $REPO
+- curl https://cloud.docker.com/api/build/v1/source/0d38cf0e-4969-4da0-9bc8-6c341b7de3de/trigger/885d75f1-afce-469b-b33a-dea314f7f307/call/
