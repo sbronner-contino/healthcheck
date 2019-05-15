@@ -12,9 +12,9 @@ COPY src /app/src
 COPY .eslintrc.json /app
 COPY .git/ /app/.git/
 
-RUN git rev-parse HEAD > /app/revision || true \
-  && yarn test --verbose --passWithNoTests \
-  && ./node_modules/.bin/eslint ./src/
+RUN yarn test --verbose --passWithNoTests \
+  && ./node_modules/.bin/eslint ./src/ \
+  && git rev-parse HEAD > /app/revision || true
 
 FROM node:12.2.0-alpine
 
