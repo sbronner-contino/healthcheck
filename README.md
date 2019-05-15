@@ -27,11 +27,17 @@ Building the docker image performs **linting** and **unit testing** of the code.
 
 Only if the linting and tests passed is the docker image successfully build.
 
-## CI/CD
+## Continous Integration
 
 For CI, this project uses [https://travis-ci.org](https://travis-ci.org/sbronner-contino/healthcheck).
 
-If the CI job completes successfully, the travis-ci job will trigger [https://hub.docker.com](https://cloud.docker.com/repository/docker/csbronner/healthcheck/general) to build and push the docker image to **csbronner/healthcheck:latest**
+If the test and integration test jobs complete successfully, and the branch being built is master - the travis-ci deploy job will build, tag and push an image to [https://hub.docker.com](https://cloud.docker.com/repository/docker/csbronner/healthcheck/general).
+
+Two images will be pushed on such a build:
+* csbronner/healthcheck:**latest**
+* csbronner/healthcheck:**$GIT_REV**
+
+...where $GIT_REV is the first 7 characters of the git sha-1 hash from which the image was built.
 
 ## Run
 
