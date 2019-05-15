@@ -28,7 +28,7 @@ jobs:
       script: npm test --verbose integration-tests/
     - stage: deploy
       script:
-      - docker login -u csbronner -p $DOCKER_PASS
+      - docker login -u csbronner -p $DOCKER_PASSWORD
       - export REPO=csbronner/healthcheck
       - docker build -f Dockerfile -t $REPO:$COMMIT .
       - docker tag $REPO:$COMMIT $REPO:latest
