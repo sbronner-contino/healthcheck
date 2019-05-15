@@ -1,5 +1,22 @@
 language: node_js
 node_js:
 - '12'
-after_success:
-- curl https://cloud.docker.com/api/build/v1/source/0d38cf0e-4969-4da0-9bc8-6c341b7de3de/trigger/885d75f1-afce-469b-b33a-dea314f7f307/call/
+services:
+- docker
+stages:
+- test
+- build
+- integration-test
+- name: deploy
+    if: branch = master
+jobs:
+  include:
+    - stage: test
+      script: npm test --verbose src/
+    - stage: build
+      script: docker build . -t healthcheck
+    - stage: integration-test
+      install: docker run --rm -p 8888:8888 healthcheck
+      script: npm test --verbose integration-tests/
+    - stage: deploy
+      script: curl https://cloud.docker.com/api/build/v1/source/0d38cf0e-4969-4da0-9bc8-6c341b7de3de/trigger/885d75f1-afce-469b-b33a-dea314f7f307/call/
