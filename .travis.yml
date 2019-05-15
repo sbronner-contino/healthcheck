@@ -8,7 +8,6 @@ services:
 
 stages:
 - test
-- build
 - integration-test
 - name: deploy
   if: branch = master
@@ -17,9 +16,8 @@ jobs:
   include:
     - stage: test
       script: npm test --verbose src/
-    - stage: build
-      script: docker build . -t healthcheck
     - stage: integration-test
+      before_install: docker build . -t healthcheck
       install: docker run --rm -p 8888:8888 healthcheck
       script: npm test --verbose integration-tests/
     - stage: deploy
