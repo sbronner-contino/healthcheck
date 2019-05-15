@@ -1,0 +1,13 @@
+{
+  "name": "healthy-endpoints",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+      "yarn": "1.16.0",
+      "eslint": "5.16.0",
+      "jest": "24.8.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
