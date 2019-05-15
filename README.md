@@ -6,8 +6,8 @@
 This is a service to demonstrate a restful endpoint that will tirelessly respond in the affirmative. The service will respond with a json payload containing:
 
 * a description of the service
-* the version of the service (defined by the version file)
-* the git revision that the service is built from (defined by the revision file)
+* the version of the service - as found in the package.json file
+* the git revision that the service is built from - as determined by `git rev-parse HEAD`
 
 ## Quick Start
 
