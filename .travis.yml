@@ -1,10 +1,18 @@
 language: node_js
 node_js:
-  - "12"
+- '12'
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=csbronner/healthcheck
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker push $REPO
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export REPO=csbronner/healthcheck
+- export TAG=latest
+- docker build -f Dockerfile -t $REPO:$COMMIT .
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker push $REPO
+env:
+  global:
+    - secure: "RH55zYdq64GNqC+pQ4HM369d6l6terS/0xtRfHiq3GYyUkypkmicHid/p1NWW44zmXxhRaOlghOuFSVTG2Y2x/rkeOS/klxhv2EDY3Db1rBFp9U7AbSwrpJmt/9Q00ocZ9KNSHFEsU/vvmqlyvorztUewlb5QddmqBQxkduHZRvsMHQEJgGOmGYG8H+biuSPfv2RcNDfXTDrDexH5U7VLuLEvQRPhbsFgjQ78FQuFzFjeRWxzKIpUAMU2zbGAPtx05cwC7zqHQo/fAn1gNjb59zHLStNBJRmT3U/AhVZBhNZiP9Zi2doFgOq3N+C1SAxF1Aehf7LLjIxd4BgveE5n9V/PMDeKrf72/Jx2N08jQt4GeFkiOM276Gx+5uYlAzOthDJvy7A3XkKdKK5FyUhvnixUjgIWpIUMPnuC+L0yWoAZyKo6pyI22h57ZZ9ySEsNW4Jg3oFdCknqiQfCdDHGWGKF3YgUsFKN94ruGhK0PQ3nWLqhf6O4dMgh9Bw1jr8fC5SXt/ze2+A3BLFjLKTR8fCb/47Swe6quYPBCrCfklX4HxAnim16SV4o3Ecv8czD1sWS/8lvF+0C2ZDsOIFF0cDQuM2sk8ie0wxwJV1LoQyylPLE58bqglTic9JjQffnPXPu+Y+b2HEdMO5pE9appqeYnhPQLersW8sQVzEyk0=" # DOCKER EMAIL
+    - secure: "c4kIb1o01q1PjxJjBQ6UZVQmp4PocGKkii+pmMxY7Zx8sDF8Po3OarY5xrBRijwqWcxzzpWjX3FxvMfEhuor0CVAkuqiIGoNrYMDOBginqKkmT1C8vs/aqGzDusr7tQ/T2I/X4jrVgkCMdOV2Ae1AGrtsWcF8Yf7vc0xqadbdZnRNFfXL7krys8IFouynaruPqYXcp0xcrvIoPFJiV4g85xB0qMN/EZaHG31lc0UMIXKbNmeognkRsdas+gMQ5pKKQmQSXEczjijHHzhFcEtQyzdMqD8sNy7AAy0aa/NnYZTrT7WWnQ/1VJBC8SOBR4kE5cZk81gL7wn6lkPRm6i/y51VtyrqbE1duky9txBkklV8aek9Z31b2+aCeBWlcFSiFPAyM/oKQMiAFZjBL2ti298QAnRp2lzrmGjx/XBg0hsAtIUcApv28SfmPs18GJNz47fWM0oGZcg+uLGGTUc+KbNub7tKuKOzbm1Ife7RVKhktxb8qNttrQk4iOFj7PaZ25N0ZWGVMo/NfPUj0+jUODq848Cnse/CBuB6C0EkXLGpOSyqMWbsyx8OULBbNB1uUY6RCN7V0pRf7q4GXJTv54uivdez/7FPcoJ+82JXkkcucbGLFiRRrewooEp2edl34WjQMKqxuP6r/YVgukVe2Xli/kg13Bq79Y93WTsENI=" # DOCKER_USER
+    - secure: "EtoYB3dey6Up0jV2oCjm3uVD79pX0oll3xj9WooThhvm6JuC1SmoPQeInHEqsCqYCY4uX+2iffaMn2ePzwnjvzpzPtOJunso1K/OSDgRpiP7X5D4Spd2sDL3JIT/wqjNZKsK3zqZC+/mVTKF6OauxyCUWNVyEU1rlCa0MZ4zIB4Ek4cPC/n0dHYAzrrU/6WyV4ujr9ZRGS+9/YAAJ9aPrPvmjT682FFbM19cAeNE5lVqrWFkSzHUWcRr4eYM6gIq6qxgCFgDuYfZ9066JI3gS+fgEoQp9LQm2bK+dwCxl1vE8RUrhXinhBmkcA9wUqfM3q8M+FB6Mri/TmjfCU7AxIj4JbR5s0+g2W21DfZ8T3RA6o/s3Jvogx8DRHwjpH3dPGeOI/MYqqaLTFvQ7Q97SR+prdwzbOVynvkxDbz2AwGwWC11uTXLq3vWGWR/D/WrqiIWemAvkpNo1PmzwDk01vmtyvXSveWyURHGGxyo8WIrmOUQE49mtbv7YBtZY26O3pyXpbq1F0Ad/AR8BI8zD4cvsn7mk/cUwMJP4m5VzT26FGFbU3JyYZ+UoAvPJcGBdkhH5GLJZfQ6v2yufSMMkkHQLfHD+YrI9PF5Sn6ASyM+39FnwGyw1C6WPy9Wm3VeRs+OQNDw3OGNGzE78Ts+1RVOyvBVxwRngPAXRJZEiOA=" # DOCKER_PASS
+    - COMMIT=${TRAVIS_COMMIT::8}
+services:
+  - docker
