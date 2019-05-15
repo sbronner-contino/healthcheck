@@ -18,7 +18,7 @@ jobs:
       script: npm test --verbose src/
     - stage: integration-test
       before_install: docker build . -t healthcheck
-      install: docker run --rm -p 8888:8888 healthcheck
+      install: docker run --rm -d -p 8888:8888 healthcheck
       script: npm test --verbose integration-tests/
     - stage: deploy
       script: curl https://cloud.docker.com/api/build/v1/source/0d38cf0e-4969-4da0-9bc8-6c341b7de3de/trigger/885d75f1-afce-469b-b33a-dea314f7f307/call/
